@@ -66,7 +66,7 @@ df = pd.DataFrame(data)
 
 #df.to_csv('./../../data/raw/raw_data.csv', index=False)
 df.to_csv('./data/raw/raw_data.csv', index=False)
-
+# %%
 import os
 
 current_path = os.getcwd()
