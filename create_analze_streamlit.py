@@ -23,6 +23,11 @@ if "df_cleaned" not in st.session_state:
 
 st.title(streamlit_texts ["app_title"])
 
+st.write("2023-05-18, J. Köppern")
+
+st.download_button(label="Download data_raw.csv", file_name="data_raw.csv", data="data_raw.csv")
+
+
 with st.expander("About this app"):
     st.markdown(streamlit_texts ["app_text"])
 
@@ -35,7 +40,12 @@ remove_outliers(default_window_size)
 
 st.header("Fit polynomials")
 
-# df_poly = fit_poly(df_cleaned, plot=False)
+make_plots = st.checkbox("Insert plots", value=True)
+
+if st.button("Fit polynomial"):
+    df_poly = fit_poly(st.session_state.df_cleaned, plot=make_plots)
+
+    st.dataframe(df_poly)
 
 
 
