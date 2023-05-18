@@ -33,6 +33,9 @@ streamlit_texts = {
 if "df" not in st.session_state:
     st.session_state.df = pd.DataFrame()
 
+if "df_cleaned" not in st.session_state:
+    st.session_state.df_cleaned = pd.DataFrame()
+
 st.title(streamlit_texts ["app_title"])
 
 st.markdown(streamlit_texts ["app_text"])
@@ -70,6 +73,8 @@ if len(st.session_state.df.columns) > 0:
     plt.xlabel("x")
     plt.ylabel("y")
 
+    plt.grid(True)
+
     st.pyplot(fig)
 
 # Remove outliers
@@ -78,16 +83,33 @@ st.header("Remove outliers")
 clean_up = st.button("Rmove outliers")
 
 if clean_up:
-    df_cleaned = process_data_in_windows(
-        df, 
+    st.session_state.df_cleaned = process_data_in_windows(
+        st.session_state.df, 
         "y",
         window_size,
         plot=False)
+    
+    fig = plt.figure()
+
+    if len(st.session_state.df_cleaned.columns) > 0:
+        sns.scatterplot(
+            data=st.session_state.df_cleaned,
+            x = "x", 
+            y= "y")
+
+    # Set title and labels
+    plt.title("Raw data")
+    plt.xlabel("x")
+    plt.ylabel("y")
+
+    plt.grid(True)
+
+    st.pyplot(fig)
 
 
 
-df_poly = fit_poly(df_cleaned, plot=False)
+# df_poly = fit_poly(df_cleaned, plot=False)
 
-st.pyplot()
+
 
 # %%
