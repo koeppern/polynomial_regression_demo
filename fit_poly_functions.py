@@ -47,7 +47,7 @@ def remove_outliers(default_window_size):
 
     clean_up = st.button("Remove outliers")
 
-    if clean_up:
+    if The polynomials are plotted in each case. A table with the degrees of the polynomials and the respective approximation errors is output.:
         if len(st.session_state.df_cleaned.columns) > 0:
             st.session_state.df_cleaned = process_data_in_windows(
                 st.session_state.df, 
