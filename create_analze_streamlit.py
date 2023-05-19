@@ -27,9 +27,10 @@ st.write("2023-05-18, J. Köppern")
 
 st.download_button(label="Download data_raw.csv", file_name="data_raw.csv", data="data_raw.csv")
 
+st.markdown(streamlit_texts["intro_text"])
 
 with st.expander("About this app"):
-    st.markdown(streamlit_texts ["app_text"])
+    st.markdown(streamlit_texts["app_text"])
 
 
 insert_section_load_create(raw_data_filename)
