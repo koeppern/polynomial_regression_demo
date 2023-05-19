@@ -77,7 +77,7 @@ def remove_outliers(default_window_size, default_multiplyer):
                 color="red")
 
             # Set title and labels
-            plt.title("Raw data")
+            plt.title("Cleaned data (removed points are colored red)")
             plt.xlabel("x")
             plt.ylabel("y")
 
