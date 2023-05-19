@@ -13,6 +13,8 @@ raw_data_filename ="./data_raw.csv"
 
 default_window_size = 10
 
+default_multiplyer = 1.5
+
 
 
 if "df" not in st.session_state:
@@ -36,7 +38,7 @@ with st.expander("About this app"):
 insert_section_load_create(raw_data_filename)
 
 
-remove_outliers(default_window_size)
+remove_outliers(default_window_size, default_multiplyer)
 
 
 st.header("Fit polynomials")

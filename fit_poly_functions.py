@@ -1,11 +1,11 @@
 # 2023-05-18, J. Köppern
-
+# %%
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
-
+# %%
 
 streamlit_texts = {
     "app_title":"Fit polynomial into data 💻☁️",
@@ -31,7 +31,7 @@ streamlit_texts = {
 }
 
 
-def remove_outliers(default_window_size):
+def remove_outliers(default_window_size, default_multiplyer):
     # Remove outliers
     st.header("Remove outliers")
 
@@ -44,14 +44,23 @@ def remove_outliers(default_window_size):
         step=1
     )
 
+    multiplier = st.slider(
+        label="Window size in which IQR is applied",
+        min_value=1.0,
+        max_value=100.0,
+        value=default_multiplyer,
+        step=0.1
+    )
+
     clean_up = st.button("Remove outliers")
 
-    if The polynomials are plotted in each case. A table with the degrees of the polynomials and the respective approximation errors is output.:
-        if len(st.session_state.df_cleaned.columns) > 0:
+    if clean_up:
+        if len(st.session_state.df.columns) > 0:
             st.session_state.df_cleaned = process_data_in_windows(
                 st.session_state.df, 
                 "y",
                 window_size,
+                multiplier=multiplier,
                 plot=False)
             
             fig = plt.figure()
@@ -61,17 +70,20 @@ def remove_outliers(default_window_size):
                 x = "x", 
                 y= "y")
 
-        # Set title and labels
-        plt.title("Raw data")
-        plt.xlabel("x")
-        plt.ylabel("y")
+            # Set title and labels
+            plt.title("Raw data")
+            plt.xlabel("x")
+            plt.ylabel("y")
 
-        plt.grid(True)
+            plt.grid(True)
 
-        st.pyplot(fig)
+            st.pyplot(fig)
 
 
 def fit_poly(df, plot=True):
+    if len(df) == 0:
+        return
+
     # Fit polxnomials of various degrees
     df_poly = pd.DataFrame()
 
@@ -108,7 +120,7 @@ def fit_poly(df, plot=True):
 
     return df_poly
 
-def outlier_detection_iqr(df, column, multiplier=1.5):
+def outlier_detection_iqr(df, column, multiplier):
     Q1 = df[column].quantile(0.25)
     Q3 = df[column].quantile(0.75)
 
