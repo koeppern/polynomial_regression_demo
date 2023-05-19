@@ -25,7 +25,7 @@ streamlit_texts = {
 - Repository on GitHub, CI/CD pipline via GitHub Actions.
 - Hostet as Azure Web Service.
 - **Usage**
-- - Create noisy data with outliers or upload ownn CSV file.
+- - Create noisy data with outliers or upload own CSV file.
 - - Remove outliers via IQR method.
 - - Fit polynomials of various degrees and see fitting errors."""
 }
@@ -44,18 +44,18 @@ def remove_outliers(default_window_size):
         step=1
     )
 
-    clean_up = st.button("Rmove outliers")
+    clean_up = st.button("Remove outliers")
 
     if clean_up:
-        st.session_state.df_cleaned = process_data_in_windows(
-            st.session_state.df, 
-            "y",
-            window_size,
-            plot=False)
-        
-        fig = plt.figure()
-
         if len(st.session_state.df_cleaned.columns) > 0:
+            st.session_state.df_cleaned = process_data_in_windows(
+                st.session_state.df, 
+                "y",
+                window_size,
+                plot=False)
+            
+            fig = plt.figure()
+
             sns.scatterplot(
                 data=st.session_state.df_cleaned,
                 x = "x", 
