@@ -62,12 +62,12 @@ def remove_outliers(default_window_size):
                 x = "x", 
                 y= "y")
 
-        # Set title and labels
-        plt.title("Raw data")
-        plt.xlabel("x")
-        plt.ylabel("y")
+            # Set title and labels
+            plt.title("Raw data")
+            plt.xlabel("x")
+            plt.ylabel("y")
 
-        plt.grid(True)
+            plt.grid(True)
 
         st.pyplot(fig)
 
