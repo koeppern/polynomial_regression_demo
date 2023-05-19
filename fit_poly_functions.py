@@ -47,7 +47,7 @@ def remove_outliers(default_window_size, default_multiplyer):
     multiplier = st.slider(
         label="Window size in which IQR is applied",
         min_value=1.0,
-        max_value=100.0,
+        max_value=20.0,
         value=default_multiplyer,
         step=0.1
     )
@@ -56,7 +56,7 @@ def remove_outliers(default_window_size, default_multiplyer):
 
     if clean_up:
         if len(st.session_state.df.columns) > 0:
-            st.session_state.df_cleaned = process_data_in_windows(
+            st.session_state.df_cleaned, st.session_state.df_removed = process_data_in_windows(
                 st.session_state.df, 
                 "y",
                 window_size,
@@ -69,6 +69,12 @@ def remove_outliers(default_window_size, default_multiplyer):
                 data=st.session_state.df_cleaned,
                 x = "x", 
                 y= "y")
+            
+            sns.scatterplot(
+                data=st.session_state.df_removed,
+                x = "x", 
+                y= "y",
+                color="red")
 
             # Set title and labels
             plt.title("Raw data")
@@ -150,7 +156,14 @@ def process_data_in_windows(df, column, window_size, multiplier=1.5, plot=True):
     if plot:
         plot_xy(df_concat.x, df_concat.y)
 
-    return df_concat
+    df_merged = df.merge(df_concat, how='outer', indicator=True)
+    df_removed = df_merged[df_merged['_merge'] == 'left_only']
+    df_removed = df_removed.drop(columns=['_merge'])
+
+
+
+
+    return df_concat, df_removed
 
 def insert_section_load_create(raw_data_filename):
     # Load/create df
