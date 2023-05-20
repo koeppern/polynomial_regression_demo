@@ -41,7 +41,7 @@ The `create_data` function in the source code implements these steps, and it is 
 The Interquartile Range (IQR) cleanup method is used to remove outliers from the synthetic data. The IQR method is a robust technique for identifying and eliminating data points that deviate significantly (see next paragraph) from the overall distribution. By applying this method, we can preprocess the data and improve the accuracy of the polynomial fitting process. The app provides an interactive way to adjust the parameters for outlier removal, allowing users to explore the impact of different settings on the cleaned data.
 
 The idea behind the Interquartile Range (IQR) method is to measure the statistical spread of the data and identify data points that lie outside a certain range. The IQR is calculated as the difference between the 75th percentile (Q3) and the 25th percentile (Q1) of the data. Data points that fall below Q1 - k * IQR or above Q3 + k * IQR, where k is a user-defined multiplier, are considered outliers.
-
+![Cleaned data in x-y plane](images/cleaned_data.png)
 This method is robust against the influence of extreme values, as it focuses on the central portion of the data distribution. By removing the identified outliers, we can obtain a cleaner dataset that better represents the underlying structure, which in turn improves the accuracy of the polynomial fitting process.
 
 In the provided source code, the IQR cleanup method is implemented within the `outlier_detection_iqr` and `process_data_in_windows` functions. Here's how it's done:
@@ -65,7 +65,7 @@ In the app, the IQR cleanup process is triggered when the user clicks the "Remov
 ## Fitting polynomials
 
 Finding the Best-suited Degree (*best* is to be defined) In this section, we will discuss the process of fitting polynomials to the cleaned data and evaluating their approximation errors to determine the best-suited polynomial degree. The app fits polynomials of various degrees to the data and calculates the mean squared error for each degree. By comparing the errors, we can identify the optimal polynomial degree that provides the best balance between complexity and accuracy. The app also visualizes the fitted polynomials, allowing users to observe the impact of different polynomial degrees on the data approximation.
-
+![Polynomial of degree 6 fitted into the cleaned data](images/fit-6.png)
 The concept of polynomial fitting involves finding a polynomial function that best approximates the given data points. This is achieved by minimizing the difference between the actual data points and the corresponding points on the polynomial curve. In our app, we use the numpy.polyfit function to fit polynomials of different degrees to the cleaned data and calculate their coefficients.
 
 The fitting process is implemented in the `fit_poly` function in the source code, which performs the following steps:
@@ -83,7 +83,7 @@ The fitted polynomials and their respective approximation errors are visualized 
 ## Choosing the optimal degree
 
 Choosing the Optimal Degree: Balancing Complexity and Accuracy In this section, we will discuss the importance of selecting the optimal polynomial degree for fitting the cleaned data. It is crucial to define "optimal" or "best" in a quantitative manner, as it helps in making an informed decision based on the trade-offs between complexity and accuracy. In the context of polynomial fitting, optimality can be related to the balance between overfitting and underfitting, the elbow curve of error over degree, and the point where the decrease of the fitting error diminishes over the degree.
-
+![Mean squared fitting error over the polynomial's degree](images/elbow.png)
 Overfitting occurs when a polynomial of a high degree fits the data too closely, capturing the noise and outliers in the data. This results in a model that performs well on the training data but poorly on new, unseen data. On the other hand, underfitting occurs when a polynomial of a low degree is unable to capture the underlying structure of the data, leading to a poor approximation.
 
 To choose the optimal degree, we can analyze the elbow curve, which is a plot of the fitting error (e.g., mean squared error) against the polynomial degree. As the degree increases, the fitting error generally decreases. However, there is a point where the decrease in fitting error becomes negligible or starts to increase due to overfitting. This point, often referred to as the "elbow point," can be considered as the optimal degree for the polynomial fitting.
