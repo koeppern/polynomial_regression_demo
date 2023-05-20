@@ -1,5 +1,5 @@
 # Create and clean data, fit polynomials
-2023-05-20, j: Köppern
+2023-05-20, J. Köppern
 
 Here you'll find a Python app (deployed on [Azure](https://polynomial-regression-demo.azurewebsites.net/)) with a Streamlit UI for approximating (modelling) data with a polynomial. This showcasing app
 - generates synthetic data with noise and outliers,
