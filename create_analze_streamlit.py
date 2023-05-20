@@ -28,7 +28,7 @@ if "df_removed" not in st.session_state:
 
 st.title(streamlit_texts ["app_title"])
 
-st.write("2023-05-18, J. Köppern")
+st.markdown("2023-05-18, J. Köppern, see [GitHub](https://koeppern.github.io/polynomial_regression_demo/)")
 
 st.download_button(label="Download data_raw.csv", file_name="data_raw.csv", data="data_raw.csv")
 
