@@ -10,7 +10,7 @@ Hint: Terms, such as suitable or goodness of approximation, must be defined quan
 
 ## Insertion - what's a polynomial
 
-A polynomial is a mathematical expression consisting of variables and coefficients, combined using addition, subtraction, and multiplication operations. It can be represented as a sum of terms, where each term is a product of a constant coefficient and a variable raised to a non-negative integer power. For example, a quadratic polynomial can be written as f(x) = ax^2 + bx + c, where a, b, and c are coefficients and x is the variable.
+A polynomial is a mathematical expression consisting of variables and coefficients, combined using addition, subtraction, and multiplication operations. It can be represented as a sum of terms, where each term is a product of a constant coefficient and a variable raised to a non-negative integer power. For example, a quadratic polynomial can be written as `f(x) = ax^2 + bx + c`, where *a*, *b*, and *c* are coefficients and *x* is the variable.
 
 ## Generating synthetic data
 
@@ -19,7 +19,7 @@ The synthetic data is generated using Python by creating a base polynomial funct
 - fitting a polynomial through these points, and
 - introducing noise and outliers to the resulting curve.
 
-The generated data is then stored in a pandas DataFrame for further processing and analysis. In the provided source code, this process is triggered when the user clicks the "Create" button, which calls the create_data function. The complete implementation details can be found in the source code, allowing readers to explore and understand the data generation process as sketch in the following.
+The generated data is then stored in a pandas DataFrame for further processing and analysis. In the provided source code, this process is triggered when the user clicks the "Create" button, which calls the `create_data` function. The complete implementation details can be found in the source code, allowing readers to explore and understand the data generation process as sketch in the following.
 
 To create the synthetic data using Python, I follow these steps:
 
@@ -69,18 +69,12 @@ Finding the Best-suited Degree (*best* is to be defined) In this section, we wil
 The concept of polynomial fitting involves finding a polynomial function that best approximates the given data points. This is achieved by minimizing the difference between the actual data points and the corresponding points on the polynomial curve. In our app, we use the numpy.polyfit function to fit polynomials of different degrees to the cleaned data and calculate their coefficients.
 
 The fitting process is implemented in the fit_poly function in the source code, which performs the following steps:
-
-Iterate through a range of polynomial degrees.
-
-For each degree, fit a polynomial to the cleaned data using the numpy.polyfit function.
-
-Create a numpy.poly1d object using the obtained coefficients, representing the fitted polynomial function.
-
-Evaluate the polynomial function at the x-values of the cleaned data to obtain the approximated y-values.
-
-Calculate the mean squared error between the actual y-values and the approximated y-values.
-
-Store the degree and the corresponding mean squared error in a pandas DataFrame.
+1. Iterate through a range of polynomial degrees.
+2. For each degree, fit a polynomial to the cleaned data using the numpy.polyfit function.
+3. Create a numpy.poly1d object using the obtained coefficients, representing the fitted polynomial function.
+4. Evaluate the polynomial function at the x-values of the cleaned data to obtain the approximated y-values.
+5. Calculate the mean squared error between the actual y-values and the approximated y-values.
+6. Store the degree and the corresponding mean squared error in a pandas DataFrame.
 
 In the app, the polynomial fitting process is initiated when the user clicks the "Fit polynomial" button. Users can also choose to display the plots of the fitted polynomials by checking the "Insert plots" checkbox.
 
