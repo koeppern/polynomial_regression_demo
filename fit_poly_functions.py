@@ -124,6 +124,24 @@ def fit_poly(df, plot=True):
 
     df_poly = df_poly.reset_index()
 
+    fig = plt.figure()
+
+    sns.lineplot(
+        data=df_poly,
+        x="degree",
+        y="mean_squared_error",
+    )
+
+    plt.title("Mean squared fitting error (MSE)")
+
+    plt.ylabel("MSE")
+
+    plt.xlabel("Polynomial degree")
+
+    plt.grid(True)
+
+    st.pyplot(fig)
+
     return df_poly
 
 def outlier_detection_iqr(df, column, multiplier):
