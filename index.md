@@ -1,5 +1,5 @@
 # Create and clean data, fit polynomials
-2023-05-20, J. Köppern
+2023-05-20, J. Köppern, supported by GPT-4
 
 Here you'll find a Python app (deployed on [Azure](https://polynomial-regression-demo.azurewebsites.net/)) with a Streamlit UI for approximating (modelling) data with a polynomial. This showcasing app
 - generates synthetic data with noise and outliers,
@@ -65,7 +65,7 @@ In the app, the IQR cleanup process is triggered when the user clicks the "Remov
 ## Fitting polynomials
 
 Finding the Best-suited Degree (*best* is to be defined) In this section, we will discuss the process of fitting polynomials to the cleaned data and evaluating their approximation errors to determine the best-suited polynomial degree. The app fits polynomials of various degrees to the data and calculates the mean squared error for each degree. By comparing the errors, we can identify the optimal polynomial degree that provides the best balance between complexity and accuracy. The app also visualizes the fitted polynomials, allowing users to observe the impact of different polynomial degrees on the data approximation.
-![Polynomial of degree 6 fitted into the cleaned data](images/fit-6.png)
+![Polynomial of degree 6 fitted into the cleaned data](images/fit_6.png)
 The concept of polynomial fitting involves finding a polynomial function that best approximates the given data points. This is achieved by minimizing the difference between the actual data points and the corresponding points on the polynomial curve. In our app, we use the numpy.polyfit function to fit polynomials of different degrees to the cleaned data and calculate their coefficients.
 
 The fitting process is implemented in the `fit_poly` function in the source code, which performs the following steps:
