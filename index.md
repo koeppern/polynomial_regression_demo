@@ -18,7 +18,7 @@ The synthetic data is generated using Python by creating a base polynomial funct
 - defining interpolation points,
 - fitting a polynomial through these points, and
 - introducing noise and outliers to the resulting curve.
-
+![Raw data in x-y plane](images/raw_data.png)
 The generated data is then stored in a pandas DataFrame for further processing and analysis. In the provided source code, this process is triggered when the user clicks the "Create" button, which calls the `create_data` function. The complete implementation details can be found in the source code, allowing readers to explore and understand the data generation process as sketch in the following.
 
 To create the synthetic data using Python, I follow these steps:
