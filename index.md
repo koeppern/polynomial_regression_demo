@@ -10,7 +10,7 @@ Hint: Terms, such as suitable or goodness of approximation, must be defined quan
 
 ## Insertion - what's a polynomial
 
-A polynomial is a mathematical expression consisting of variables and coefficients, combined using addition, subtraction, and multiplication operations. It can be represented as a sum of terms, where each term is a product of a constant coefficient and a variable raised to a non-negative integer power. For example, a quadratic polynomial can be written as `f(x) = ax^2 + bx + c`, where *a*, *b*, and *c* are coefficients and *x* is the variable.
+A polynomial is a mathematical expression consisting of variables and coefficients, combined using addition, subtraction, and multiplication operations. It can be represented as a sum of terms, where each term is a product of a constant coefficient and a variable raised to a non-negative integer power. For example, a quadratic polynomial can be written as $$f(x) = ax^2 + bx + c$$, where *a*, *b*, and *c* are coefficients and *x* is the variable.
 
 ## Generating synthetic data
 
@@ -23,18 +23,18 @@ The generated data is then stored in a pandas DataFrame for further processing a
 
 To create the synthetic data using Python, I follow these steps:
 
-1.       Define a set of interpolation points (x, y) through which the base polynomial should pass.
+1. Define a set of interpolation points (x, y) through which the base polynomial should pass.
 
-2.       Fit a polynomial of the desired degree to these points using the numpy.polyfit function, which returns the polynomial coefficients.
-3.       Create a numpy.poly1d object using the obtained coefficients, which represents the base polynomial function.
-4.       Generate a set of x-values (x_poly) using numpy.linspace within the desired range.
-5.       Calculate the corresponding y-values (y_poly) by evaluating the base polynomial function at the x_poly points.
-6.       Add noise to the y_poly values by generating random values within a specified range (noise_magnitude) and adding them to the original y_poly values.
-7.       Introduce outliers by randomly selecting a few indices in the y_poly array and setting their values to a specific outlier value (e.g., 0).
-8.       Combine the x_poly and y_poly_with_noise_outliers arrays into a dictionary and create a pandas DataFrame based on it.
-9.       Save the generated DataFrame as a CSV file for further use.
+2. Fit a polynomial of the desired degree to these points using the numpy.polyfit function, which returns the polynomial coefficients.
+3. Create a numpy.poly1d object using the obtained coefficients, which represents the base polynomial function.
+4. Generate a set of x-values (`x_poly`) using numpy.linspace within the desired range.
+5. Calculate the corresponding y-values (`y_poly`) by evaluating the base polynomial function at the `x_poly` points.
+6. Add noise to the `y_poly` values by generating random values within a specified range (`noise_magnitude`) and adding them to the original `y_poly` values.
+        7. Introduce outliers by randomly selecting a few indices in the `y_poly` array and setting their values to a specific outlier value (e.g., 0).
+8. Combine the `x_poly` and `y_poly_with_noise_outliers` arrays into a dictionary and create a pandas DataFrame based on it.
+9. Save the generated DataFrame as a CSV file for further use.
 
-The create_data function in the source code implements these steps, and it is called when the user clicks the "Create" button in the app.
+The `create_data` function in the source code implements these steps, and it is called when the user clicks the "Create" button in the app.
 
 ## Date clean-up: Outlier removal
 
@@ -44,21 +44,21 @@ The idea behind the Interquartile Range (IQR) method is to measure the statistic
 
 This method is robust against the influence of extreme values, as it focuses on the central portion of the data distribution. By removing the identified outliers, we can obtain a cleaner dataset that better represents the underlying structure, which in turn improves the accuracy of the polynomial fitting process.
 
-In the provided source code, the IQR cleanup method is implemented within the outlier_detection_iqr and process_data_in_windows functions. Here's how it's done:
+In the provided source code, the IQR cleanup method is implemented within the `outlier_detection_iqr` and `process_data_in_windows` functions. Here's how it's done:
 
-The outlier_detection_iqr function takes a DataFrame (df), a column name (column), and a multiplier (k) as input arguments.
+The `outlier_detection_iqr` function takes a DataFrame (df), a column name (column), and a multiplier (k) as input arguments.
 
-1.       It calculates the 25th percentile (Q1) and the 75th percentile (Q3) of the specified column in the DataFrame.
-2.       The Interquartile Range (IQR) is computed as the difference between Q3 and Q1.
-3.       Lower and upper bounds for outlier detection are calculated as Q1 - k * IQR and Q3 + k * IQR, respectively.
-4.       The function returns a filtered DataFrame containing only the data points that lie within the lower and upper bounds.
+1. It calculates the 25th percentile (Q1) and the 75th percentile (Q3) of the specified column in the DataFrame.
+2. The Interquartile Range (IQR) is computed as the difference between Q3 and Q1.
+3. Lower and upper bounds for outlier detection are calculated as Q1 - k * IQR and Q3 + k * IQR, respectively.
+4. The function returns a filtered DataFrame containing only the data points that lie within the lower and upper bounds.
 
-The process_data_in_windows function is responsible for applying the IQR cleanup method to the data in a sliding window fashion:
+The `process_data_in_windows` function is responsible for applying the IQR cleanup method to the data in a sliding window fashion:
 
-1.       It takes a DataFrame (df), a column name (column), a window size, and a multiplier (k) as input arguments.
-2.       The function divides the DataFrame into windows of the specified size.
-3.       For each window, it calls the outlier_detection_iqr function to remove outliers.
-4.       The cleaned windows are concatenated to form a new DataFrame containing the cleaned data.
+1. It takes a DataFrame (df), a column name (column), a window size, and a multiplier (k) as input arguments.
+2. The function divides the DataFrame into windows of the specified size.
+3. For each window, it calls the `outlier_detection_iqr` function to remove outliers.
+4. The cleaned windows are concatenated to form a new DataFrame containing the cleaned data.
 
 In the app, the IQR cleanup process is triggered when the user clicks the "Remove outliers" button. Users can adjust the window size and multiplier using sliders provided in the app's interface.
 
@@ -68,7 +68,7 @@ Finding the Best-suited Degree (*best* is to be defined) In this section, we wil
 
 The concept of polynomial fitting involves finding a polynomial function that best approximates the given data points. This is achieved by minimizing the difference between the actual data points and the corresponding points on the polynomial curve. In our app, we use the numpy.polyfit function to fit polynomials of different degrees to the cleaned data and calculate their coefficients.
 
-The fitting process is implemented in the fit_poly function in the source code, which performs the following steps:
+The fitting process is implemented in the `fit_poly` function in the source code, which performs the following steps:
 1. Iterate through a range of polynomial degrees.
 2. For each degree, fit a polynomial to the cleaned data using the numpy.polyfit function.
 3. Create a numpy.poly1d object using the obtained coefficients, representing the fitted polynomial function.
