@@ -23,6 +23,9 @@ if "df" not in st.session_state:
 if "df_cleaned" not in st.session_state:
     st.session_state.df_cleaned = pd.DataFrame()
 
+if "df_removed" not in st.session_state:
+    st.session_state.df_removed = pd.DataFrame()
+
 st.title(streamlit_texts ["app_title"])
 
 st.write("2023-05-18, J. Köppern")
