@@ -103,6 +103,37 @@ To choose the optimal degree, we can analyze the elbow curve, which is a plot of
 In the app, the elbow curve is visualized, allowing users to observe the relationship between the fitting error and the polynomial degree. By analyzing this curve, users can identify the optimal degree that provides the best balance between complexity and accuracy, ensuring a robust and reliable polynomial fit for the cleaned data.
 
 ## Deployment as Azure Web Service
+Azure Web Service is a cloud-based platform that enables users to build, deploy, and manage web applications and services using Microsoft Azure infrastructure.
+One app can be deployed for free under the so-called F1 plan.
+
+On the console the steps look something like
+```
+az login
+az group create --name rg-jk-1 --location westeurope
+az appservice plan create --name jk-free-linux --resource-group rg-jk-1 --sku F1 --is-linux
+az webapp create --name jk-az-01 --resource-group rg-jk-1 --plan jk-free-linux --runtime "PYTHON|3.9" --deployment-source-url https://github.com/koeppern/polynomial_regression_demo.git --deployment-source-branch main
+az webapp config set --resource-group <group-name> --name <app-name> --startup-file "<path/to/custom-startup.json>"
+```
+In the startup-file the command `python -m streamlit run app.py --server.port 8000 --server.address 0.0.0.0`needs to be defines.
+
+az login: This command is used to log in to your Azure account. If you have not installed the Azure CLI, you can download it from the official Azure CLI website. Once installed, open your terminal or command prompt and type az login. This will open a web page where you can enter your Azure credentials.
+
+az group create --name rg-jk-1 --location westeurope: This command creates a new resource group named "rg-jk-1" in the "westeurope" location. A resource group is a logical container for resources that are deployed within an Azure subscription. It helps in organizing and managing resources based on their lifecycle and their relationship to each other.
+
+az appservice plan create --name jk-free-linux --resource-group rg-jk-1 --sku F1 --is-linux: This command creates an App Service plan named "jk-free-linux" in the "rg-jk-1" resource group. The plan uses the "F1" (Free) pricing tier and runs on a Linux-based operating system. An App Service plan defines a set of computing resources for a web app to run, including the operating system, capacity, and features.
+
+az webapp create --name jk-az-01 --resource-group rg-jk-1 --plan jk-free-linux --runtime "PYTHON|3.9" --deployment-source-url https://github.com/koeppern/polynomial_regression_demo.git --deployment-source-branch main: This command creates a web app named "jk-az-01" in the "rg-jk-1" resource group, using the "jk-free-linux" App Service plan. The web app runs on Python 3.9 runtime. Additionally, it sets the deployment source to a GitHub repository containing the Polynomial Regression Demo, and specifies the "main" branch for deployment.
+
+az webapp config set --resource-group <group-name> --name <app-name> --startup-file "<path/to/custom-startup.json>": This command sets the startup file for the web app. Replace <group-name> with the name of your resource group (in this case, "rg-jk-1"), <app-name> with the name of your web app (in this case, "jk-az-01"), and <path/to/custom-startup.json> with the path to your custom startup file, if needed. The startup file is used to configure the web app and define how it should start.
+
+
+
+These steps can be done via the Azure CLI or the web portal.
+
+
+
+
+
 
 ## Deployment in Steamlit Cloud
 Streamlit Cloud is a platform that allows users to deploy, share, and collaborate on Streamlit apps for free in the cloud without the need for complex infrastructure setup.
