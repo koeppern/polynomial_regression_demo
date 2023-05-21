@@ -2,19 +2,21 @@
 2023-05-20, J. Köppern, supported by GPT-4
 
 ## Example for an end-to-end data science project
-NAME.PY, RUN VIA STREAMLIT UN ...
 
 
-Here you'll find a Python app (deployed on [Azure](https://polynomial-regression-demo.azurewebsites.net/)) with a Streamlit UI for approximating (modelling) data with a polynomial. This showcasing app
+Here you'll find a Python app (see [*create_analze_streamlit.py*](https://github.com/koeppern/polynomial_regression_demo/blob/main/create_analze_streamlit.py)) with a Streamlit UI for approximating (modelling) data with a polynomial. This showcasing app
 - generates synthetic data with noise and outliers,
 - removes these outliers using a variant of the interquartile range method and
 - fits polynomials of various degrees into the data to determine a suitable degree for the approximation.
+You can try the app on [Stremlit Cloud](https://koeppern-polynomial-regression-d-create-analze-streamlit-ljcm67.streamlit.app/).
 
 This project is an **end-to-end** data science project since it's a data-driven solution, from the initial problem formulation to the 
 Although the task is fictitious (*put polynomials through data points and determine a suitable degree for the model*), it corresponds to a real problem from my professional past.
 The end result is an app which can be deployed on Azure or AWS, e.g.
 
 At the end of a Data Science project, the results are presented, usually to a non-technical audience. This is not part of the present project and so I point out that the end is not yet reached with the deployment of the app.
+
+The app deployment is also followed by monitoring of the app, which is also not done here.
 
 Hint: Terms, such as suitable or goodness of approximation, must be defined quantitatively in order to be used further. This will be done in the following.
 
@@ -100,5 +102,10 @@ To choose the optimal degree, we can analyze the elbow curve, which is a plot of
 
 In the app, the elbow curve is visualized, allowing users to observe the relationship between the fitting error and the polynomial degree. By analyzing this curve, users can identify the optimal degree that provides the best balance between complexity and accuracy, ensuring a robust and reliable polynomial fit for the cleaned data.
 
-## Creating the Azure Web Service
+## Deployment as Azure Web Service
+
+## Deployment in Steamlit Cloud
+Streamlit Cloud is a platform that allows users to deploy, share, and collaborate on Streamlit apps for free in the cloud without the need for complex infrastructure setup.
+
+All you need to to is to create a new app on the platform and point it to the App PY file (in my case *create_analze_streamlit.py*). This depoys the app [here](https://koeppern-polynomial-regression-d-create-analze-streamlit-ljcm67.streamlit.app/).
 
