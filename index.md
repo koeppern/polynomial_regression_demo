@@ -1,18 +1,28 @@
 # Create and clean data, fit polynomials
 2023-05-20, J. Köppern, supported by GPT-4
 
+## Example for an end-to-end data science project
+NAME.PY, RUN VIA STREAMLIT UN ...
+
+
 Here you'll find a Python app (deployed on [Azure](https://polynomial-regression-demo.azurewebsites.net/)) with a Streamlit UI for approximating (modelling) data with a polynomial. This showcasing app
 - generates synthetic data with noise and outliers,
 - removes these outliers using a variant of the interquartile range method and
 - fits polynomials of various degrees into the data to determine a suitable degree for the approximation.
 
+This project is an **end-to-end** data science project since it's a data-driven solution, from the initial problem formulation to the 
+Although the task is fictitious (*put polynomials through data points and determine a suitable degree for the model*), it corresponds to a real problem from my professional past.
+The end result is an app which can be deployed on Azure or AWS, e.g.
+
+At the end of a Data Science project, the results are presented, usually to a non-technical audience. This is not part of the present project and so I point out that the end is not yet reached with the deployment of the app.
+
 Hint: Terms, such as suitable or goodness of approximation, must be defined quantitatively in order to be used further. This will be done in the following.
 
-## Insertion - what's a polynomial
+### Insertion - what's a polynomial
 
 A polynomial is a mathematical expression consisting of variables and coefficients, combined using addition, subtraction, and multiplication operations. It can be represented as a sum of terms, where each term is a product of a constant coefficient and a variable raised to a non-negative integer power. For example, a quadratic polynomial can be written as $$f(x) = ax^2 + bx + c$$, where *a*, *b*, and *c* are coefficients and *x* is the variable.
 
-## Generating synthetic data
+### Generating synthetic data
 
 The synthetic data is generated using Python by creating a base polynomial function and adding noise and outliers to it. This process involves
 - defining interpolation points,
@@ -36,7 +46,7 @@ To create the synthetic data using Python, I follow these steps:
 
 The `create_data` function in the source code implements these steps, and it is called when the user clicks the "Create" button in the app.
 
-## Date clean-up: Outlier removal
+### Date clean-up: Outlier removal
 
 The Interquartile Range (IQR) cleanup method is used to remove outliers from the synthetic data. The IQR method is a robust technique for identifying and eliminating data points that deviate significantly (see next paragraph) from the overall distribution. By applying this method, we can preprocess the data and improve the accuracy of the polynomial fitting process. The app provides an interactive way to adjust the parameters for outlier removal, allowing users to explore the impact of different settings on the cleaned data.
 
@@ -62,7 +72,7 @@ The `process_data_in_windows` function is responsible for applying the IQR clean
 
 In the app, the IQR cleanup process is triggered when the user clicks the "Remove outliers" button. Users can adjust the window size and multiplier using sliders provided in the app's interface.
 
-## Fitting polynomials
+### Fitting polynomials
 
 Finding the Best-suited Degree (*best* is to be defined) In this section, we will discuss the process of fitting polynomials to the cleaned data and evaluating their approximation errors to determine the best-suited polynomial degree. The app fits polynomials of various degrees to the data and calculates the mean squared error for each degree. By comparing the errors, we can identify the optimal polynomial degree that provides the best balance between complexity and accuracy. The app also visualizes the fitted polynomials, allowing users to observe the impact of different polynomial degrees on the data approximation.
 ![Polynomial of degree 6 fitted into the cleaned data](images/fit_6.png)
@@ -80,7 +90,7 @@ In the app, the polynomial fitting process is initiated when the user clicks the
 
 The fitted polynomials and their respective approximation errors are visualized in form of a table by the app, allowing users to analyze the results and determine the optimal (for definition see below) polynomial degree for their data. The complete implementation details can be found in the source code, enabling readers to explore and understand the polynomial fitting process.
 
-## Choosing the optimal degree
+### Choosing the optimal degree
 
 Choosing the Optimal Degree: Balancing Complexity and Accuracy In this section, we will discuss the importance of selecting the optimal polynomial degree for fitting the cleaned data. It is crucial to define "optimal" or "best" in a quantitative manner, as it helps in making an informed decision based on the trade-offs between complexity and accuracy. In the context of polynomial fitting, optimality can be related to the balance between overfitting and underfitting, the elbow curve of error over degree, and the point where the decrease of the fitting error diminishes over the degree.
 ![Mean squared fitting error over the polynomial's degree](images/elbow.png)
@@ -89,3 +99,6 @@ Overfitting occurs when a polynomial of a high degree fits the data too closely,
 To choose the optimal degree, we can analyze the elbow curve, which is a plot of the fitting error (e.g., mean squared error) against the polynomial degree. As the degree increases, the fitting error generally decreases. However, there is a point where the decrease in fitting error becomes negligible or starts to increase due to overfitting. This point, often referred to as the "elbow point," can be considered as the optimal degree for the polynomial fitting.
 
 In the app, the elbow curve is visualized, allowing users to observe the relationship between the fitting error and the polynomial degree. By analyzing this curve, users can identify the optimal degree that provides the best balance between complexity and accuracy, ensuring a robust and reliable polynomial fit for the cleaned data.
+
+## Creating the Azure Web Service
+
