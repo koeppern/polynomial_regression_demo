@@ -4,7 +4,7 @@
 ## Example for an end-to-end data science project
 
 
-Here you'll find a Python app (see [*create_analze_streamlit.py*](https://github.com/koeppern/polynomial_regression_demo/blob/main/create_analze_streamlit.py)) with a Streamlit UI for approximating (modelling) data with a polynomial. This showcasing app
+Here (and hosted on [Streamlit Cloud](https://koeppern-polynomial-regression-d-create-analze-streamlit-ljcm67.streamlit.app/)) you'll find a Python app (see [*create_analze_streamlit.py*](https://github.com/koeppern/polynomial_regression_demo/blob/main/create_analze_streamlit.py)) with a Streamlit UI for approximating (modelling) data with a polynomial. This showcasing app
 - generates synthetic data with noise and outliers,
 - removes these outliers using a variant of the interquartile range method and
 - fits polynomials of various degrees into the data to determine a suitable degree for the approximation.
